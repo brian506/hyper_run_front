@@ -19,7 +19,7 @@ const inquiryStateToKorean = {
 const filterState = {
     page: 0,
     size: 6, // 페이지 당 데이터 수를 10으로 변경
-    sort: 'inquiredAt,desc',
+    sort: 'createDateTime,desc',
 };
 //  현재 선택된 문의 ID를 저장할 변수 
 let currentInquiryId = null;
@@ -122,7 +122,7 @@ function renderTable(pageData) {
     }
     tableBody.innerHTML = inquiries.map((inquiry, index) => {
         const rowNum = currentPage * pageSize + index + 1;
-        const formattedDate = new Date(inquiry.inquiredAt).toLocaleDateString('ko-KR');
+        const formattedDate = new Date(inquiry.createDateTime).toLocaleDateString('ko-KR');
         return `
             <tr class="inquiry-row" data-inquiry-info='${encodeHTML(JSON.stringify(inquiry))}'>
                 <td>${rowNum}</td>
@@ -212,7 +212,7 @@ function applyFiltersAndFetch() {
     // 1. 정렬 값 가져오기
     const selectedSortOption = sortDropdown.querySelector('.custom-option.selected');
     const ascCheckbox = sortDropdown.querySelector('#sort-asc');
-    const sortBy = selectedSortOption?.dataset.value || 'inquiredAt';
+    const sortBy = selectedSortOption?.dataset.value || 'createDateTime';
     const direction = ascCheckbox?.checked ? 'asc' : 'desc';
     // 2. 팝업 필터 값 가져오기
     const selectedStateOption = stateDropdown.querySelector('.custom-option.selected');
@@ -284,7 +284,7 @@ function openInquiryPopup(inquiry) {
     modal.querySelector('#inquiry-name').value = inquiry.title;
     modal.querySelector('#user-name').value = inquiry.name;
     modal.querySelector('#inquiry-type').value = inquiryTypeToKorean[inquiry.type];
-    modal.querySelector('#inquiry-at').value = new Date(inquiry.inquiredAt).toLocaleString('ko-KR');
+    modal.querySelector('#inquiry-at').value = new Date(inquiry.createDateTime).toLocaleString('ko-KR');
     modal.querySelector('#user-email').value = inquiry.email;
     modal.querySelector('#user-phoneNumber').value = inquiry.phoneNumber;
     modal.querySelector('#inquiry-content').value = inquiry.message; // textarea로 변경

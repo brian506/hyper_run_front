@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퍼니런 - 관리자 웹</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/exchange.css">
+</head>
+
+<body>
+    <!-- 전체 레이아웃을 감싸는 최상위 컨테이너 -->
+    <div class="app-container">
+
+        <!-- 상단 고정 헤더 -->
+        <header class="app-header">
+            <h1 class="header-logo">퍼니런 - 관리자웹</h1>
+            <div class="account">루트계정</div>
+        </header>
+
+        <!-- 메인영역 (사이드바 + 테이블) -->
+        <div class="main-area">
+            <!-- 사이드바 -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+
+                    <a href="games.html" class="nav-item">
+                        <i class="fa-solid fa-trophy"></i>
+                        <span>경기 관리</span>
+                    </a>
+                    <a href="user.html" class="nav-item">
+                        <i class="fa-solid fa-users"></i>
+                        <span>사용자 관리</span>
+                    </a>
+                    <a href="payment.html" class="nav-item">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <span>결제 관리</span>
+                    </a>
+                    <a href="settings.html" class="nav-item">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>앱 설정</span>
+                    </a>
+                    <a href="inquiry.html" class="nav-item">
+                        <i class="fa-solid fa-headset"></i>
+                        <span>고객 지원</span>
+                    </a>
+                    <a href="exchange.html" class="nav-item active">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                        <span>환전 관리</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- 테이블 -->
+            <main class="content-area">
+                <div class="content-header">
+                    <!-- 날짜 선택 -->
+                    <div class="date-picker-wrapper" id="date-range-container">
+                        <i class="fa-solid fa-calendar-days" data-toggle></i>
+                        <input type="text" id="date-range-display" placeholder="날짜를 선택하세요" data-input readonly>
+                    </div>
+                </div>
+
+                <!-- 왼쪽: 정렬 그룹 -->
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label class="filter-label">정렬</label>
+                    <div class="custom-select-wrapper" id="sort-dropdown">
+                        <!-- 현재 선택된 값을 보여주는 영역 -->
+                        <div class="custom-select-trigger">
+                            <span>최신순</span>
+                        </div>
+                        <!-- 드롭다운 옵션 목록 -->
+                        <div class="custom-options">
+                            <div class="custom-option selected" data-value="desc">최신순</div>
+                            <div class="custom-option" data-value="asc">오래된순</div>                                                    
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 오른쪽: 검색 관련 그룹 -->
+                <div class="filter-group-right">
+                    <div class="filter-group" id="search-filter-container">
+                        <label class="filter-label">검색 필터</label>
+                        <div class="custom-select-wrapper" id="search-category-wrapper">
+                            <!-- 현재 선택된 값을 보여주는 영역 -->
+                            <div class="custom-select-trigger">
+                                <span>환전 상태</span>
+                            </div>
+                            <!-- 드롭다운 옵션 목록 -->
+                            <div class="custom-options">
+                                <div class="custom-option selected" data-value="">전체</div> 
+                                <div class="custom-option" data-value="REQUESTED">환전 신청</div>   
+                                <div class="custom-option" data-value="COMPLETED">환전 완료</div>                        
+                                <div class="custom-option" data-value="CANCELLED">환전 취소</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label" for="searchInput">검색</label>
+                        <div class="search-box">
+                            <input type="text" id="searchInput" placeholder="키워드 입력">
+                            <i class="fa-solid fa-magnifying-glass" id="searchButton"></i>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="table-container">
+            <p class="total-count" id="total-count">총 0건</p>
+            <table class="data-table">
+                <thead>
+                    <tr class="exchange-row">
+                        <th>Index</th>
+                        <th>이름</th>
+                        <th>등록일자</th>
+                        <th>환전 금액</th>
+                        <th>은행</th>
+                        <th>계좌번호</th>
+                        <th>환전 상태</th>
+                    </tr>
+                </thead>
+                <tbody id="data-table-body"></tbody>
+            </table>
+        </div>
+    
+        <!-- 환전 정보 팝업 창 -->
+        <div class="modal-overlay hidden" id="exchange-detail-modal">
+            <div class="main-view">
+                <div class="main-container">
+                    <header class="header">
+                        <h1>환전 정보 상세페이지</h1>
+                        <button class="close-btn">&times;</button>
+                    </header>
+
+                    <main class="exchange-body">                
+                        <section class="info-section">
+                            <form class="info-form">
+                                <div class="form-group">
+                                    <label for="user-name">이름</label>
+                                    <input type="text" id="user-name" placeholder="이름" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount">환전 금액</label>
+                                    <input type="number" id="amount" placeholder="환전 금액" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bank-name">은행</label>
+                                    <input type="text" id="bank-name" placeholder="은행" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="account-number">계좌번호</label>
+                                    <input type="text" id="account-number" placeholder="계좌번호" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exchange-status">환전 상태</label>
+                                    <input type="text" id="exchange-status" placeholder="환전 상태" readonly>
+                                </div>
+                            </form>
+                        </section>
+
+                        <div class="action-buttons">
+                            <button class="action-btn approve-btn" id="approve-btn">환전 승인</button>
+                            <button class="action-btn cancel-btn" id="cancel-btn">환전 취소</button>
+                        </div>
+                    </main>
+                </div>
+            </div> 
+        
+        <!-- 환전 취소,요청 확인 팝업 -->
+        <div class="modal-overlay hidden" id="approve-confirm-modal">
+            <div class="confirm-modal">
+                <h2>환전 요청 승인</h2>
+                <h3>환전 요청을 승인하시겠습니까?</h3>
+                <div class="modal-actions">
+                    <button class="modal-btn confirm-btn">확인</button>
+                    <button class="modal-btn cancel-btn">취소</button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal-overlay hidden" id="cancel-confirm-modal">
+            <div class="confirm-modal">
+                <h2>환전 요청 취소</h2>
+                <h3>환전 요청을 취소하시겠습니까?</h3>
+                <div class="modal-actions">
+                    <button class="modal-btn confirm-btn">확인</button>
+                    <button class="modal-btn cancel-btn">취소</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-overlay hidden" id="approve-success-modal">
+            <div class="confirm-modal">
+                <h2>환전 승인 완료</h2>
+                <h3>환전 요청이 승인되었습니다.</h3>
+                <div class="modal-actions">
+                    <button class="modal-btn confirm-btn full-width">확인</button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal-overlay hidden" id="cancel-success-modal">
+            <div class="confirm-modal">
+                <h2>환전 취소 완료</h2>
+                <h3>환전 요청이 취소되었습니다.</h3>
+                <div class="modal-actions">
+                    <button class="modal-btn confirm-btn full-width">확인</button>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+
+       
+
+    <nav class="pagination" id="pagination-container">
+        <a href="#" class="page-arrow">&lt;</a>
+        <a href="#" class="page-link">1</a>
+        <a href="#" class="page-link">2</a>
+        <a href="#" class="page-link">3</a>
+        <a href="#" class="page-link">4</a>
+        <a href="#" class="page-link">5</a>
+        <a href="#" class="page-link">6</a>
+        <a href="#" class="page-link">7</a>
+        <a href="#" class="page-link-active">8</a>
+        <a href="#" class="page-link">9</a>
+        <a href="#" class="page-link">10</a>
+        <a href="#" class="page-arrow">&gt;</a>
+    </nav>
+    </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+
+    <script type="module" src="dist/exchange.js"></script>
+</body>
+
+</html>

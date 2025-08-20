@@ -148,7 +148,7 @@
 /* ------------------------- */
 .custom-select-wrapper {
     position: relative;
-    width: 272px; /* 정렬 드롭다운 너비 */
+    width: 170px; /* 정렬 드롭다운 너비 */
     user-select: none;
 }
 

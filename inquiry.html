@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>퍼니런 - 관리자 웹</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="src/inquiry.css">
 </head>
+
 <body>
     <!-- 전체 레이아웃을 감싸는 최상위 컨테이너 -->
     <div class="app-container">
@@ -43,27 +45,31 @@
                         <i class="fa-solid fa-headset"></i>
                         <span>고객 지원</span>
                     </a>
+                    <a href="exchange.html" class="nav-item">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                        <span>환전 관리</span>
+                    </a>
                 </nav>
             </aside>
-        
+
             <main class="content-area">
                 <div class="content-header">
                     <header class="inquiry-support">
                         <h2>고객 지원</h2>
-                    </header>          
+                    </header>
                 </div>
 
                 <div class="filter-bar">
                     <div class="filter-group">
-                        <label class="filter-label">정렬</label>    
+                        <label class="filter-label">정렬</label>
                         <div class="custom-select-wrapper" id="sort-dropdown">
                             <!-- 현재 선택된 값을 보여주는 영역 -->
                             <div class="custom-select-trigger">
                                 <span>문의일</span>
-                            </div> 
+                            </div>
                             <!-- 드롭다운 옵션 목록 -->
                             <div class="custom-options">
-                                <div class="custom-option selected" data-value="inquiredAt">문의일</div>                        
+                                <div class="custom-option selected" data-value="inquiredAt">문의일</div>
                                 <div class="custom-option" data-value="state">문의 상태</div>
                                 <div class="custom-option" data-value="type">문의 유형</div>
                                 <div class="custom-option" data-value="name">문의자명</div>
@@ -81,18 +87,22 @@
                     <div class="filter-group-right">
                         <div class="filter-group" id="search-filter-container">
                             <label class="filter-label">검색 필터</label>
-                            <button class="filter-add-btn" id="toggle-filter-popup"><i class="fa-solid fa-plus"></i></button>
+                            <button class="filter-add-btn" id="toggle-filter-popup"><i
+                                    class="fa-solid fa-plus"></i></button>
 
                             <div class="filter-popup hidden" id="search-filter-popup">
                                 <header class="popup-header">
-                                    <i class="fa-solid fa-plus"></i><h4>검색 필터</h4>
+                                    <i class="fa-solid fa-plus"></i>
+                                    <h4>검색 필터</h4>
                                 </header>
                                 <main class="popup-body">
                                     <form>
                                         <div class="filter-row">
                                             <label class="popup-label">문의일</label>
                                             <div class="input-group">
-                                                <input type="text" id="filter-start-date" placeholder="시작 날짜"><span class="tilde">-</span><input type="text" id="filter-end-date" placeholder="종료 날짜">
+                                                <input type="text" id="filter-start-date" placeholder="시작 날짜"><span
+                                                    class="tilde">-</span><input type="text" id="filter-end-date"
+                                                    placeholder="종료 날짜">
                                             </div>
                                         </div>
                                         <div class="filter-row">
@@ -113,7 +123,7 @@
                                                 <div class="custom-select-trigger">
                                                     <span>계정 관련 문의</span>
                                                 </div>
-                                                <div class="custom-options">                                
+                                                <div class="custom-options">
                                                     <div class="custom-option" data-value="ACCOUNT">계정 관련 문의</div>
                                                     <div class="custom-option" data-value="PAYMENT">결제 관련 문의</div>
                                                     <div class="custom-option" data-value="REFUND">환불 관련 문의</div>
@@ -123,7 +133,7 @@
                                                     <div class="custom-option" data-value="OTHER">기타 문의</div>
                                                 </div>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </form>
                                 </main>
                             </div>
@@ -136,14 +146,14 @@
                             </div>
                         </div>
                     </div>
-                </div> 
-                <div class="table-container">        
-                    <p class="total-count" id="total-count">총 0건</p> 
+                </div>
+                <div class="table-container">
+                    <p class="total-count" id="total-count">총 0건</p>
                     <table class="data-table">
                         <thead>
                             <tr class="inquiry-row">
                                 <th>Index</th>
-                                <th>문의일</th>                        
+                                <th>문의일</th>
                                 <th>문의 상태</th>
                                 <th>문의 유형</th>
                                 <th>문의자명</th>
@@ -152,17 +162,17 @@
                             </tr>
                         </thead>
                         <tbody id="data-table-body"></tbody>
-                    </table>            
+                    </table>
                 </div>
 
                 <!-- 문의사항 상세 팝업 -->
-                 <div class="modal-overlay hidden" id="inquiry-detail-modal">
+                <div class="modal-overlay hidden" id="inquiry-detail-modal">
                     <div class="main-view">
-                        
-                            <header class="header">
-                                <h1>문의 상세페이지</h1>
-                                <button class="close-btn">&times;</button>
-                            </header>
+
+                        <header class="header">
+                            <h1>문의 상세페이지</h1>
+                            <button class="close-btn">&times;</button>
+                        </header>
                         <main class="inquiry-body">
                             <div class="delete-button">
                                 <button class="action-btn delete-btn" id="delete-inquiry-btn">
@@ -173,7 +183,7 @@
                                 <div class="form-group">
                                     <label for="inquiry-name">문의명</label>
                                     <input type="text" id="inquiry-name" placeholder="문의명" readonly>
-                                </div>                            
+                                </div>
                                 <div class="form-group">
                                     <label for="user-name">문의자명</label>
                                     <input type="text" id="user-name" placeholder="문의자명" readonly>
@@ -194,58 +204,64 @@
                                     <label for="user-phoneNumber">전화번호</label>
                                     <input type="text" id="user-phoneNumber" placeholder="전화번호" readonly>
                                 </div>
-                                
+
                                 <div class="form-group full-width">
                                     <label for="inquiry-content">문의 내용</label>
                                     <input type="text" id="inquiry-content" placeholder="문의 내용" readonly>
                                 </div>
                             </form>
-                                <div class="answer-button">
-                                    <button class="action-btn answer-btn" id="answer-inquiry">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                          </svg>
-                                          <span>문의 답변하기</span>
-                                    </button>
+                            <div class="answer-button">
+                                <button class="action-btn answer-btn" id="answer-inquiry">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                    <span>문의 답변하기</span>
+                                </button>
+                            </div>
+
+                            <section class="answer-section hidden" id="inquiry-answer-section">
+                                <h2 class="answer-title">문의 답변하기</h2>
+                                <div class="answer-form">
+                                    <label for="answer-content">문의 답변</label>
+                                    <textarea id="answer-content" rows="10" placeholder="답변 내용을 입력하세요"></textarea>
                                 </div>
-                            
-                                <section class="answer-section hidden" id="inquiry-answer-section">
-                                    <h2 class="answer-title">문의 답변하기</h2>
-                                    <div class="answer-form">
-                                        <label for="answer-content">문의 답변</label>
-                                        <textarea id="answer-content" rows="10" placeholder="답변 내용을 입력하세요"></textarea>
-                                    </div>
-                                    <div class="button-group">
-                                        <button class="action-button cancel-answer-btn" id="cancel-answer-btn">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <div class="button-group">
+                                    <button class="action-button cancel-answer-btn" id="cancel-answer-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <line x1="18" y1="6" x2="6" y2="18"></line>
                                             <line x1="6" y1="6" x2="18" y2="18"></line>
-                                          </svg>
-                                          <span>답변 취소</span>
-                                        </button>
-                                      
-                                        <button class="action-button submit-answer-btn" id="submit-answer-btn">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        </svg>
+                                        <span>답변 취소</span>
+                                    </button>
+
+                                    <button class="action-button submit-answer-btn" id="submit-answer-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <line x1="22" y1="2" x2="11" y2="13"></line>
                                             <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                                          </svg>
-                                          <span>문의 답변하기</span>
-                                        </button>
-                                      </div>
-                                </section>
-                            
-                        </main>                    
-                        
+                                        </svg>
+                                        <span>문의 답변하기</span>
+                                    </button>
+                                </div>
+                            </section>
+
+                        </main>
+
                     </div>
-                 </div>
-                
+                </div>
+
                 <div class="modal-overlay hidden" id="delete-confirm-modal">
                     <div class="confirm-modal">
                         <h2>문의 삭제</h2>
                         <p>문의를 삭제하시겠습니까?</p>
                         <div class="modal-actions">
                             <button class="modal-btn confirm-btn">확인</button>
-                            <button class="modal-btn cancel-btn">취소</button>                        
+                            <button class="modal-btn cancel-btn">취소</button>
                         </div>
                     </div>
                 </div>
@@ -258,22 +274,22 @@
                         </div>
                     </div>
                 </div>
-            </div>
+        </div>
 
-                <nav class="pagination" id ="pagination-container">
-                    <a href="#" class="page-arrow">&lt;</a>
-                    <a href="#" class="page-link">1</a>
-                    <a href="#" class="page-link">2</a>
-                    <a href="#" class="page-link">3</a>
-                    <a href="#" class="page-link">4</a>
-                    <a href="#" class="page-link">5</a>
-                    <a href="#" class="page-link">6</a>
-                    <a href="#" class="page-link">7</a>
-                    <a href="#" class="page-link-active">8</a>
-                    <a href="#" class="page-link">9</a>
-                    <a href="#" class="page-link">10</a>
-                    <a href="#" class="page-arrow">&gt;</a>
-                </nav>            
+        <nav class="pagination" id="pagination-container">
+            <a href="#" class="page-arrow">&lt;</a>
+            <a href="#" class="page-link">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">4</a>
+            <a href="#" class="page-link">5</a>
+            <a href="#" class="page-link">6</a>
+            <a href="#" class="page-link">7</a>
+            <a href="#" class="page-link-active">8</a>
+            <a href="#" class="page-link">9</a>
+            <a href="#" class="page-link">10</a>
+            <a href="#" class="page-arrow">&gt;</a>
+        </nav>
         </main>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -281,4 +297,5 @@
 
     <script type="module" src="dist/inquiry.js"></script>
 </body>
+
 </html>

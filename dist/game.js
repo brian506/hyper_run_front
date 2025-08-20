@@ -1,18 +1,15 @@
-const today = new Date();
-const oneWeekAgo = new Date(today.setDate(today.getDate() - 7));
-const todayStr = new Date().toISOString().split('T')[0];
-const oneWeekAgoStr = oneWeekAgo.toISOString().split('T')[0];
 // --- 상태 및 상수 관리 ---
+/** Flatpickr 인스턴스를 저장할 변수 */
+let datePickerInstance = null;
 /** 필터의 현재 상태를 저장하고 관리하는 전역 변수 */
 const filterState = {
-    adminGameStatus: 'FINISHED',
+    adminGameStatus: 'FINISHED', // 기본 탭은 '종료된 경기'
     page: 0,
     size: 6,
-    sort: 'createdAt,desc',
-    keyword: '',
-    startDate: oneWeekAgoStr,
-    endDate: todayStr,
+    sort: 'createDateTime,desc',
+    // startDate와 endDate는 초기에 설정하지 않음
 };
+/** 서버로부터 경기 데이터를 가져오는 함수 */
 async function fetchGames() {
     const params = new URLSearchParams({
         adminGameStatus: filterState.adminGameStatus,
@@ -20,7 +17,7 @@ async function fetchGames() {
         size: filterState.size.toString(),
         sort: filterState.sort,
     });
-    // 필터링 동적 추가
+    // 키워드나 날짜가 있을 때만 파라미터에 추가
     if (filterState.keyword) {
         params.append('keyword', filterState.keyword);
     }
@@ -29,7 +26,7 @@ async function fetchGames() {
         params.append('endDate', filterState.endDate);
     }
     const GAME_URL = `http://localhost:8080/v1/api/admin/games?${params.toString()}`;
-    const accessToken = localStorage.getItem('accessToken'); // 토큰이 있는 사용자에게만 허용
+    const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
         window.location.href = 'login.html';
@@ -44,14 +41,10 @@ async function fetchGames() {
             }
         });
         if (!response.ok) {
-            if (response.status === 401 || response.status === 403) {
-                console.error('인증에 실패했거나 권한이 없습니다.');
-            }
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const responseDate = await response.json();
         const data = responseDate.data;
-        // 3. 받아온 데이터로 각 UI 컴포넌트를 업데이트합니다.
         renderTable(data);
         renderPagination(data);
         updateTotalCount(data.totalElements);
@@ -64,7 +57,7 @@ async function fetchGames() {
         }
     }
 }
-// fetchGames 가 받아온 데이터를 html 로 변환하여 화면에 표시하는 역할
+/** 받아온 데이터를 HTML 테이블로 변환하여 화면에 표시 */
 function renderTable(pageData) {
     const tableBody = document.getElementById('data-table-body');
     if (!tableBody)
@@ -80,27 +73,26 @@ function renderTable(pageData) {
         <tr>
             <td>${rowNum}</td>
             <td>${game.name}</td>
-            <td>${game.createdAt.split('T')[0]}</td>
+            <td>${game.createDateTime.split('T')[0]}</td>
             <td>${game.modifiedAt.split('T')[0]}</td>
         </tr>
     `;
     }).join('');
 }
-// 전체 데이터 수
+/** 전체 데이터 수 업데이트 */
 function updateTotalCount(total) {
     const countElement = document.getElementById('total-count');
     if (countElement) {
         countElement.textContent = `총 ${total}건`;
     }
 }
-// 페이지 번호 동적 생성
+/** 페이지 번호를 동적으로 생성 */
 function renderPagination(pageData) {
     const { totalPages, number: currentPage } = pageData;
     const container = document.getElementById('pagination-container');
     if (!container)
         return;
-    container.innerHTML = ''; // 기존 페이지 버튼들 초기화
-    // 이전 페이지 버튼
+    container.innerHTML = '';
     const prevBtn = document.createElement('a');
     prevBtn.href = '#';
     prevBtn.className = 'page-arrow';
@@ -109,7 +101,6 @@ function renderPagination(pageData) {
         prevBtn.classList.add('disabled');
     prevBtn.dataset.page = (currentPage - 1).toString();
     container.appendChild(prevBtn);
-    // 페이지 번호 버튼들
     for (let i = 0; i < totalPages; i++) {
         const pageLink = document.createElement('a');
         pageLink.href = '#';
@@ -121,7 +112,6 @@ function renderPagination(pageData) {
         }
         container.appendChild(pageLink);
     }
-    // 다음 페이지 버튼
     const nextBtn = document.createElement('a');
     nextBtn.href = '#';
     nextBtn.className = 'page-arrow';
@@ -131,37 +121,47 @@ function renderPagination(pageData) {
     nextBtn.dataset.page = (currentPage + 1).toString();
     container.appendChild(nextBtn);
 }
-/** 탭 버튼 클릭을 처리하는 함수 */
+/** 탭 버튼 클릭 처리 */
 function handleTabClick(event) {
     const clickedButton = event.currentTarget;
     const allTabButtons = document.querySelectorAll('.tab-btn');
     const newStatus = clickedButton.dataset.status;
     if (newStatus && newStatus !== filterState.adminGameStatus) {
+        // 상태 변경
         filterState.adminGameStatus = newStatus;
         filterState.page = 0;
+        // 날짜 필터 상태와 화면(UI) 모두 초기화
+        filterState.startDate = undefined;
+        filterState.endDate = undefined;
+        if (datePickerInstance) {
+            datePickerInstance.clear();
+        }
         fetchGames();
         // 시각적 활성 상태 변경
         allTabButtons.forEach(btn => btn.classList.remove('active'));
         clickedButton.classList.add('active');
     }
 }
+/** 정렬 방식 변경 처리 */
 function handleSortChange(event) {
     const selectElement = event.target;
     filterState.sort = selectElement.value;
+    filterState.page = 0;
     fetchGames();
 }
-/** 검색 실행을 처리하는 함수 */
+/** 검색 실행 처리 */
 function handleSearch() {
     const searchInput = document.getElementById('searchInput');
-    filterState.keyword = searchInput.value;
-    filterState.page = 0; // 검색 시 항상 첫 페이지로
-    fetchGames();
+    if (searchInput) {
+        filterState.keyword = searchInput.value;
+        filterState.page = 0;
+        fetchGames();
+    }
 }
-/** 페이지네이션 클릭을 처리하는 함수 */
+/** 페이지네이션 클릭 처리 */
 function handlePaginationClick(event) {
     event.preventDefault();
     const target = event.target;
-    // 'A' 태그이고, 비활성화 상태가 아닐 때만 작동
     if (target.tagName === 'A' && !target.classList.contains('disabled')) {
         const page = target.dataset.page;
         if (page) {
@@ -170,7 +170,7 @@ function handlePaginationClick(event) {
         }
     }
 }
-/** 날짜 범위 변경을 처리하는 함수 (flatpickr용) */
+/** 날짜 범위 선택 완료 시 처리 (flatpickr용) */
 function handleDateChange(selectedDates) {
     if (selectedDates.length === 2) {
         filterState.startDate = selectedDates[0].toISOString().split('T')[0];
@@ -179,44 +179,31 @@ function handleDateChange(selectedDates) {
         fetchGames();
     }
 }
-/** 날짜 선택기 UI의 텍스트를 업데이트하는 함수 (flatpickr용) */
-function updateDateInput(selectedDates, dateStr, instance) {
-    // flatpickr의 input 요소에 선택된 날짜 문자열을 표시합니다.
-    instance.input.value = dateStr;
-}
+/** DOM 로드 완료 후 앱 초기화 */
 document.addEventListener('DOMContentLoaded', () => {
-    // --- HTML 요소 선택 ---
     const tabButtons = document.querySelectorAll('.tab-btn');
     const sortSelect = document.getElementById('sort-select');
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
     const paginationContainer = document.getElementById('pagination-container');
-    // 1. 탭 버튼 클릭 이벤트
-    tabButtons.forEach(button => {
-        button.addEventListener('click', handleTabClick);
-    });
-    // 2. 정렬 방식 변경 이벤트
+    tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
     sortSelect?.addEventListener('change', handleSortChange);
-    // 3. 검색 기능 
     searchButton?.addEventListener('click', handleSearch);
     searchInput?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter')
             handleSearch();
-        }
     });
-    // 4. 페이지네이션 클릭 이벤트
     paginationContainer?.addEventListener('click', handlePaginationClick);
-    // 5. 날짜 선택기 (Flatpickr) 설정
-    flatpickr("#date-range-container", {
+    // Flatpickr 인스턴스 생성 및 저장
+    datePickerInstance = flatpickr("#date-range-container", {
         wrap: true,
         mode: "range",
         dateFormat: "Y. m. d",
-        defaultDate: [filterState.startDate, filterState.endDate],
         locale: "ko",
-        onChange: handleDateChange,
-        onReady: updateDateInput, // UI 준비 시에도 input 업데이트
+        // defaultDate 제거
+        onClose: handleDateChange, // onChange 대신 onClose 사용
     });
-    // 페이지가 처음 열릴 때 데이터 로드
+    // 페이지가 처음 열릴 때 데이터 로드 (기본: 종료된 경기 전체)
     fetchGames();
 });
 export {};

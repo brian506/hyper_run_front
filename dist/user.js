@@ -164,7 +164,7 @@ function handlePaginationClick(event) {
     event.preventDefault();
     const target = event.target;
     if (target.tagName === 'A' && !target.classList.contains('disabled') && target.dataset.page) {
-        filterState.page = parseInt(target.dataset.page, 10);
+        filterState.page = parseInt(target.dataset.page, 6);
         fetchUsers();
     }
 }

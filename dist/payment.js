@@ -7,7 +7,7 @@ const paymentStateToKorean = {
 const filterState = {
     page: 0,
     size: 6,
-    sort: 'paymentAt,desc',
+    sort: 'createDateTime,desc',
 };
 async function fetchPayments() {
     const params = new URLSearchParams({
@@ -81,7 +81,7 @@ function renderTable(pageData) {
         return `
         <tr class="${rowClass}" data-payment-id="${payment.paymentId}"   data-payment-info='${JSON.stringify(payment)}'>
             <td>${rowNum}</td>
-            <td>${payment.paymentAt.split('T')[0]}</td>
+            <td>${payment.createDateTime.split('T')[0]}</td>
             <td>${payment.paymentMethod}</td>
             <td>${formattedAmount}</td>
             <td>${payment.name}</td>
@@ -152,7 +152,7 @@ function applyFiltersAndFetch() {
     const sortDropdown = document.getElementById('sort-dropdown');
     const selectedSortOption = sortDropdown?.querySelector('.custom-option.selected');
     const ascCheckbox = sortDropdown?.querySelector('#sort-asc');
-    const sortBy = selectedSortOption?.dataset.value || 'paymentAt';
+    const sortBy = selectedSortOption?.dataset.value || 'createDateTime';
     const direction = ascCheckbox?.checked ? 'asc' : 'desc';
     const keyword = document.getElementById('searchInput').value;
     // filterState 업데이트
@@ -280,9 +280,7 @@ function handleDateChange(selectedDates) {
         fetchPayments();
     }
 }
-/** 날짜 선택기 UI의 텍스트를 업데이트하는 함수 (flatpickr용) */
 function updateDateInput(selectedDates, dateStr, instance) {
-    // flatpickr의 input 요소에 선택된 날짜 문자열을 표시합니다.
     instance.input.value = dateStr;
 }
 function initializeApp() {
