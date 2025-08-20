@@ -1,0 +1,147 @@
+
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* 화면 전체 높이를 차지 */
+}
+
+/* 상단 바 (헤더) */
+.app-header {
+    height: 45px;
+    background-color: #EE77001A;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between; /* 자식 요소(로고, 계정)를 양쪽 끝으로 보냄 */
+    align-items: center; /* 세로 중앙 정렬 */
+    padding: 0 24px;
+    flex-shrink: 0; /* 헤더 높이가 줄어들지 않도록 고정 */
+}
+.header-logo {
+    font-family: Main_Font;
+    font-size: 16px;
+    color: #4A4A4A;
+    margin: 0;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0px;
+}
+.account {
+    font-family: Main_Font;
+    font-size: 16px;
+    color: #4A4A4A;
+    margin: 0;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0px;
+}
+
+
+/* 메인 영역: 사이드바와 콘텐츠를 가로로 배치 */
+.main-area {
+    display: flex;
+    flex-grow: 1; /* 헤더를 제외한 나머지 모든 세로 공간을 차지 */
+    overflow: hidden; /* 내부 콘텐츠가 넘칠 경우 스크롤 관리 */
+    gap: 24px; /* 사이드 바와 테이블 사이의 간격*/
+    padding: 1px 24px;
+}
+
+/* 왼쪽 사이드바 */
+.sidebar {
+    margin: 24px;
+    width: 214px;
+    background-color: #FDF1E6;
+    border-radius: 13px;
+    padding: 20px;
+    flex-shrink: 0; /* 사이드바 너비가 줄어들지 않도록 고정 */
+    align-self: flex-start;
+    transition: height 0.1s ease-out;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 12px;
+    text-decoration: none;
+    color: #75787B;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-item.active,
+.nav-item:hover {
+    background-color: #EE7700;
+    color: white; 
+}
+
+.nav-item i {
+    width: 20px; /* 아이콘 너비 고정으로 정렬 맞춤 */
+    text-align: center;
+}
+
+
+/* 전체 컨텐츠를 감싸고 중앙 정렬 */
+.policy-container {
+    max-width: 70%;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+/* 메인 타이틀 */
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #000;
+}
+
+/* 규정 내용이 들어가는 박스 */
+.policy-box {
+    background-color: #FDF1E6;
+    padding: 2rem;
+}
+
+/* 각 규정 섹션 */
+.policy-section {
+    margin-top: 2rem;
+}
+.policy-section:first-child {
+    margin-top: 1rem;
+}
+
+/* 섹션 제목 (1. 환불 정책 등) */
+.policy-section h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+    color: #000;
+}
+
+/* 문단 및 리스트 기본 스타일 */
+p, ul {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* 리스트 스타일 */
+ul {
+    padding-left: 20px; /* 불릿 포인트 들여쓰기 */
+    list-style-type: '•  '; /* 기본 불릿 포인트와 공백 추가 */
+}
+
+li {
+    margin-bottom: 0.5rem; /* 리스트 아이템 간의 간격 */
+}
+
+li:last-child {
+    margin-bottom: 0;
+}

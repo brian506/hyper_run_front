@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퍼니런 - 관리자 웹</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="src/game.css">
+</head>
+<body>
+    <!-- 전체 레이아웃을 감싸는 최상위 컨테이너 -->
+    <div class="app-container">
+
+        <!-- 상단 고정 헤더 -->
+        <header class="app-header">
+            <h1 class="header-logo">퍼니런 - 관리자웹</h1>
+            <div class="account">루트계정</div>
+        </header>
+
+        <!-- 메인영역 (사이드바 + 테이블) -->
+        <div class="main-area">
+            <!-- 사이드바 -->
+            <aside class="sidebar">
+                <nav class ="sidebar-nav">
+
+                    <a href="games.html" class="nav-item active">
+                        <i class="fa-solid fa-trophy"></i>
+                        <span>경기 관리</span>
+                    </a>
+                    <a href="user.html" class="nav-item">
+                        <i class="fa-solid fa-users"></i>
+                        <span>사용자 관리</span>
+                    </a>
+                    <a href="payment.html" class="nav-item">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <span>결제 관리</span>
+                    </a>
+                    <a href="settings.html" class="nav-item">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>앱 설정</span>
+                    </a>
+                    <a href="inquiry.html" class="nav-item">
+                        <i class="fa-solid fa-headset"></i>
+                        <span>고객 지원</span>
+                    </a>
+                </nav>
+            </aside>
+        
+        <!-- 테이블 -->
+        <main class="content-area">
+            <div class="content-header">
+                <!-- 날짜 선택 -->
+                <div class="date-picker-wrapper" id="date-range-container">
+                    <i class="fa-solid fa-calendar-days" data-toggle></i>                
+                    <!-- flatpickr가 사용할 숨겨진 input -->
+                    <input type="text" id="date-range-display" placeholder="날짜를 선택하세요" data-input readonly>
+                </div>
+            </div>
+                <!-- 경기 선택 탭 -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-status="FINISHED">종료된 경기</button>
+                    <button class="tab-btn" data-status="PROGRESS">진행중인 경기</button>
+                    <button class="tab-btn" data-status="SCHEDULED">예정 경기</button>
+                </div>
+
+                <!-- 검색 필터링 -->
+                <div class="filter-bar">
+                    <div class="filter-group">
+                    <label class="filter-label">정렬</label>    
+                    <select name="sort" id="sort-select">
+                        <option value="createdAt,desc">등록일자순</option>
+                        <option value="modifiedAt,desc">최근수정순</option>                    
+                    </select>
+                </div>
+                    <div class="filter-group">
+                        <label class="filter-label">검색</label>
+                        <div class="search-box">
+                            <input type="text" id = "searchInput" placeholder="키워드 입력">
+                            <i class="fa-solid fa-magnifying-glass" id = "searchButton"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container">        
+                    <p class="total-count" id="total-count">총 0건</p> 
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Index</th>
+                                <th>경기</th>
+                                <th>등록일자</th>
+                                <th>최종수정일자</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data-table-body"></tbody>
+                    </table>            
+                </div>
+        </div>
+
+                <nav class="pagination" id ="pagination-container">
+                    <a href="#" class="page-arrow">&lt;</a>
+                    <a href="#" class="page-link">1</a>
+                    <a href="#" class="page-link">2</a>
+                    <a href="#" class="page-link">3</a>
+                    <a href="#" class="page-link">4</a>
+                    <a href="#" class="page-link">5</a>
+                    <a href="#" class="page-link">6</a>
+                    <a href="#" class="page-link">7</a>
+                    <a href="#" class="page-link-active">8</a>
+                    <a href="#" class="page-link">9</a>
+                    <a href="#" class="page-link">10</a>
+                    <a href="#" class="page-arrow">&gt;</a>
+                </nav>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+
+    <script type="module" src="dist/game.js"></script>
+</body>
+</html>

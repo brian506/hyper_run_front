@@ -1,0 +1,134 @@
+/* 전체 페이지 기본 설정 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f0f2f5;
+    
+    margin: 0;
+}
+
+/* 메인 컨테이너 */
+.main-container {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh; 
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* 상단 막대 설정 */
+.header {
+    height: 25px;
+    background-color: #F5EBE0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 15px;
+    text-align: left;
+    
+}
+
+/* 상단에 있는 퍼니런 - 관리자 앱 글씨 설정*/
+.header h1 { 
+    width: 179px;
+    
+    font-size: 16px;
+    color: #4A4A4A;
+    margin: 0;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0px;
+}
+
+/* 로그인 컨테이너 (메인 콘텐츠) */
+.login-container {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* 로고 영역 */
+.logo-area {
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.logo-image {
+    width: 50%;
+    max-width: 650px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.slogan {
+    font-size: 1.1em;
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.admin-text {
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
+    margin-left: 700px;
+    line-height: 100%;
+    letter-spacing: 0px;
+}
+
+/* 로그인 폼 */
+#login-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* 입력 그룹 (아이디, 비밀번호) */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-group label {
+    font-size: 1em;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* 로그인 버튼 */
+#login-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #6a6a6a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+#login-button:hover {
+    background-color: #555;
+}

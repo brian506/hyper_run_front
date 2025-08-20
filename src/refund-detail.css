@@ -1,0 +1,251 @@
+.refund-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.refund-container h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+/* 2-1. 왼쪽 사이드바 */
+.sidebar {
+    margin: 24px;
+    width: 214px;
+    background-color: #FDF1E6;
+    border-radius: 13px;
+    padding: 20px;
+    flex-shrink: 0; /* 사이드바 너비가 줄어들지 않도록 고정 */
+    align-self: flex-start;
+    transition: height 0.1s ease-out;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 12px;
+    text-decoration: none;
+    color: #75787B;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 8px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-item.active,
+.nav-item:hover {
+    background-color: #EE7700;
+    color: white; 
+}
+
+.nav-item i {
+    width: 20px; /* 아이콘 너비 고정으로 정렬 맞춤 */
+    text-align: center;
+}
+
+.info-box {
+    margin-top: 1rem;
+    background-color: #fff9f2;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-box h2, .reason-box h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.info-box div p {
+    margin: 0.5rem 0;
+    color: #495057;
+}
+
+.reason-box input, .reason-box textarea {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #f8f9fa;
+}
+
+.reason-box input {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.reason-box textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.policy-link {
+    width: 200px;
+    height: 40px;
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #EFF0FE;
+    border-radius: 10px;
+    border: 1px solid black;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    padding : 10px 20px;
+}
+
+.policy-link:hover {
+    color: #212529;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    
+}
+
+.action-btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.approve-btn {
+    background-color: #EE7700;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #74666E;
+    color: white;
+}
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 30px;
+}
+
+.modal-btn {
+    flex: 1;
+}
+
+/* 너비가 100%인 버튼 스타일 */
+.full-width {
+    flex: none; /* flex: 1 속성 무시 */
+    width: 100%;
+}
+
+/* 팝업 관련 CSS는 payment.css의 것을 재사용 */
+.hidden { display: none; }
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-overlay.hidden {
+    display: none;
+}
+
+.main-view {
+    width: 35%;
+    height: 70%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+
+.confirm-modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 70%;
+    max-width: 295px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.confirm-modal h2 {
+    font-size: 19px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.confirm-modal h3 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #636366;
+    margin-top: 30px;
+
+}
+
+/* 버튼들을 감싸는 영역 */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* 버튼 사이의 간격 */
+}
+
+/* 확인,취소 버튼 */
+.modal-btn {
+    width: 111px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    flex: 1; /* 버튼들이 공간을 균등하게 차지하도록 */
+    cursor: pointer;
+}
+.confirm-btn {
+    background-color:#EE7700;
+    color: white;
+}
+.confirm-btn:hover {
+    background-color: #EE7700;
+}
+.cancel-btn {
+    background-color: #AEAEB2;
+    color:white;
+}
+.cancel-btn:hover {
+    background-color: #AEAEB2;
+}
+
+/* 너비가 100%인 버튼 스타일 */
+.full-width {
+    width: 100%;
+    flex: none; /* flex: 1 속성 무시 */
+}

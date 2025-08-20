@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    /* 기본 설정 */
+    "target": "ES2020", // 최신 브라우저와 호환되는 버전
+    "lib": ["ES2020", "DOM", "DOM.Iterable"], // 브라우저 환경(DOM)임을 명시
+    "module": "ESNext",
+    
+    /* 소스/결과물 위치 설정 */
+    "rootDir": "./src",
+    "outDir": "./dist",
+    
+    /* 엄격한 타입 체킹 (매우 좋은 습관입니다) */
+    "strict": true,
+    
+    /* 모듈 관련 설정 */
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+
+    /* 기타 권장 설정 */
+    "skipLibCheck": true, // 다른 라이브러리의 타입은 체크하지 않아 속도 향상
+    "forceConsistentCasingInFileNames": true // 파일 이름의 대소문자를 구분
+  },
+  "include": ["src"] // 컴파일할 소스 코드는 src 폴더에 있음을 명시
+}

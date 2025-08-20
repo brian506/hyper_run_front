@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>환불 요청 관리</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/payment.css"> 
+    <link rel="stylesheet" href="src/refund-detail.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1 class="header-logo">퍼니런 - 관리자웹</h1>
+            <div class="account">루트계정</div>
+        </header>
+        <div class="main-area">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <a href="games.html" class="nav-item">
+                        <i class="fa-solid fa-trophy"></i>
+                        <span>경기 관리</span>
+                    </a>
+                    <a href="user.html" class="nav-item">
+                        <i class="fa-solid fa-users"></i>
+                        <span>사용자 관리</span>
+                    </a>
+                    <a href="payment.html" class="nav-item active">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <span>결제 관리</span>
+                    </a>
+                    <a href="settings.html" class="nav-item">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>앱 설정</span>
+                    </a>
+                    <a href="#support" class="nav-item">
+                        <i class="fa-solid fa-headset"></i>
+                        <span>고객 지원</span>
+                    </a>
+                </nav>
+            </aside>
+        <div class="main-area">
+            
+            <main class="content-area">
+                <div class="refund-container">
+                    <h1>환불 요청 승인/거절</h1>
+                    
+                    <h2>환불 요청자</h2>
+                    <section class="info-box">
+                        <div id="requester-info">
+                            </div>
+                    </section>
+
+                    <h2>환불 대상</h2>
+                    <section class="info-box">
+                        <div id="payment-info">
+                            </div>
+                    </section>
+
+                    <section class="reason-box">
+                        <h2>환불 사유</h2>
+                        <input type="text" id="refund-type" readonly>
+                        <textarea id="refund-reason" readonly></textarea>
+                    </section>
+                    
+                    
+                    <a href="policy.html" class="policy-link">환불 규정 확인하기 &gt;</a>
+
+                    <div class="action-buttons">
+                        <button class="action-btn approve-btn" id="approve-btn">환불 요청 승인</button>
+                        <button class="action-btn reject-btn" id="reject-btn">환불 요청 거절</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="approve-confirm-modal">
+        <div class="confirm-modal">
+            <h2>환불 요청 승인</h2>
+            <h3>환불 요청을 승인하시겠습니까?</h3>
+            <div class="modal-actions">
+                <button class="modal-btn confirm-btn">확인</button>
+                <button class="modal-btn cancel-btn">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="reject-confirm-modal">
+        <div class="confirm-modal">
+            <h2>환불 요청 거절</h2>
+            <h3>환불 요청을 거절하시겠습니까?</h3>
+            <div class="modal-actions">
+                <button class="modal-btn confirm-btn">확인</button>
+                <button class="modal-btn cancel-btn">취소</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay hidden" id="approve-success-modal">
+        <div class="confirm-modal">
+            <h2>환불 승인 완료</h2>
+            <h3>환불 요청이 승인되었습니다.</h3>
+            <div class="modal-actions">
+                <button class="modal-btn confirm-btn full-width">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay hidden" id="reject-success-modal">
+        <div class="confirm-modal">
+            <h2>환불 거절 완료</h2>
+            <h3>환불 요청이 거절되었습니다.</h3>
+            <div class="modal-actions">
+                <button class="modal-btn confirm-btn full-width">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="dist/refund-detail.js"></script>
+</body>
+</html>
