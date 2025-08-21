@@ -111,7 +111,7 @@ function renderDetails(data) {
     if (paymentInfo) {
         paymentInfo.innerHTML = `
             <p><strong>결제방법 :</strong> ${data.paymentMethod}</p>
-            <p><strong>결제일자 :</strong> ${data.paymentAt.split('T')[0]}</p>
+            <p><strong>결제일자 :</strong> ${data.createDateTime}</p>
             <p><strong>금액 :</strong> ${data.price.toLocaleString()} 원</p>
         `;
     }

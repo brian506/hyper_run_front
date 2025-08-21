@@ -8,7 +8,7 @@ interface Game {
     id: number;
     name: string;
     createDateTime: string;
-    modifiedAt: string;
+    modifiedDateTime: string;
     adminGameStatus: AdminGameStatus;
 }
 
@@ -120,7 +120,7 @@ function renderTable(pageData: PageResponse<Game>): void {
             <td>${rowNum}</td>
             <td>${game.name}</td>
             <td>${game.createDateTime.split('T')[0]}</td>
-            <td>${game.modifiedAt.split('T')[0]}</td>
+            <td>${game.modifiedDateTime.split('T')[0]}</td>
         </tr>
     `;
     }).join('');
