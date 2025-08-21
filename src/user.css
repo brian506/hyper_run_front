@@ -148,14 +148,16 @@
 /* ------------------------- */
 .custom-select-wrapper {
     position: relative;
-    width: 170px; /* 정렬 드롭다운 너비 */
+    width: 270px; /* 정렬 드롭다운 너비 */
+    user-select: none;
+}
+.search-select-wrapper{
+    position: relative;
+    width: 163px; /* 정렬 드롭다운 너비 */
     user-select: none;
 }
 
-/* 검색 카테고리 드롭다운은 너비를 다르게 설정 */
-#search-category-dropdown {
-    width: 163px;
-}
+
 
 .custom-select-trigger {
     /* 기본 브라우저 스타일 제거 */

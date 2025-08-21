@@ -271,7 +271,12 @@ span.flatpickr-weekday {
 }
 .custom-select-wrapper {
     position: relative;
-    width: 170px; /* 정렬 드롭다운 너비 */
+    width: 270px; /* 정렬 드롭다운 너비 */
+    user-select: none;
+}
+.search-select-wrapper {
+    position: relative;
+    width: 163px; /* 정렬 드롭다운 너비 */
     user-select: none;
 }
 

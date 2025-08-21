@@ -282,6 +282,7 @@ function handleSortOptionClick(event: MouseEvent): void {
     wrapper.classList.remove('open');
     applyFiltersAndFetch();
 }
+
 /** 검색 카테고리 옵션 클릭 핸들러 */
 function handleSearchCategoryOptionClick(event: MouseEvent): void {
     const clickedOption = event.currentTarget as HTMLElement;

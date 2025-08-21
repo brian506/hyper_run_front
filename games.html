@@ -74,14 +74,23 @@
 
                 <!-- 검색 필터링 -->
                 <div class="filter-bar">
+                    <!-- 왼쪽: 정렬 그룹 -->
                     <div class="filter-group">
-                    <label class="filter-label">정렬</label>    
-                    <select name="sort" id="sort-select">
-                        <option value="createDateTime,desc">등록일자순</option>
-                        <option value="modifiedDateTime,desc">최근수정순</option>                    
-                    </select>
-                </div>
-                    <div class="filter-group">
+                        <label class="filter-label">정렬</label>
+                        <div class="custom-select-wrapper" id="sort-dropdown">
+                            <!-- 현재 선택된 값을 보여주는 영역 -->
+                            <div class="custom-select-trigger">
+                                <span>등록일자순</span>
+                            </div>
+                            <!-- 드롭다운 옵션 목록 -->
+                            <div class="custom-options">
+                                <div class="custom-option selected" data-value="createDateTime">등록일자순</div>
+                                <div class="custom-option" data-value="modifiedDateTime">최근수정순</div>                                                        
+                                </div>
+                            </div>
+                        </div>                
+                    <div class="filter-group-right">
+                        <div class="filter-group">
                         <label class="filter-label">검색</label>
                         <div class="search-box">
                             <input type="text" id = "searchInput" placeholder="키워드 입력">
@@ -89,6 +98,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
                 <div class="table-container">        
                     <p class="total-count" id="total-count">총 0건</p> 

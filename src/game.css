@@ -274,7 +274,8 @@ span.flatpickr-weekday {
     justify-content: space-between;
     align-items: flex-end; /* 라벨과 입력창을 아래 정렬 */
     margin-bottom: 24px;
-    gap: 24px; /* 두 필터링 박스 간의 간격*/
+    background-color: white;
+    border-radius: 12px;
 }
 
 .filter-group {
@@ -282,36 +283,94 @@ span.flatpickr-weekday {
     flex-direction: column;
     gap:8px;
 }
+.filter-group-right {
+    display: flex;
+    gap: 16px; /* 오른쪽 두 그룹(검색 카테고리, 검색) 사이의 간격 */
+    align-items: flex-end;
+    
+}
 
 .filter-label {
-    font-family: Pretendard;
     font-weight: 500;
-    line-height: 100%;
-    letter-spacing: 0%;
     font-size: 12px;
     color: #000000;
 }
-/* 정렬 박스 스타일 */
-#sort-select {
+
+
+.custom-select-wrapper {
+    position: relative;
+    width: 270px; /* 정렬 드롭다운 너비 */
+    user-select: none;
+}
+
+
+.custom-select-trigger {
     /* 기본 브라우저 스타일 제거 */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     
-    width: 272px; 
+    width: 100%; /* 부모(.custom-select-wrapper)의 너비를 따름 */
     height: 47px; 
     padding: 0 16px; 
-    border: 1px solid var(--border-secondary-color);
+    border: 1px solid #000000;
     border-radius: 5px; 
     background-color: white;
     font-size: 16px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 
-    /* 커스텀 화살표 아이콘 추가 (SVG 사용) */
+    /* 커스텀 화살표 아이콘 */
     background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.41 0.589996L6 5.17L10.59 0.589996L12 2L6 8L0 2L1.41 0.589996Z' fill='%23212529'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 16px center;
 }
+
+.custom-select-wrapper.open .custom-select-trigger {
+    border-color: #000000;
+}
+
+.custom-options {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background-color: #F6F6F9;
+    border: 1px #000000;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 10;
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease-out;
+}
+
+.custom-select-wrapper.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-option {
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.custom-option:hover {
+    background-color: var(--hover-bg-color);
+}
+
+.custom-option.selected {
+    background-color: #E9F2FC;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
 /* 검색 박스 스타일 */
 .search-box {
     position: relative;

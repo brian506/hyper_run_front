@@ -39,11 +39,10 @@ let datePickerInstance: any = null;
 
 /** 필터의 현재 상태를 저장하고 관리하는 전역 변수 */
 const filterState: FilterState = {
-    adminGameStatus: 'FINISHED', // 기본 탭은 '종료된 경기'
+    adminGameStatus: 'FINISHED',
     page: 0,
     size: 6,
     sort: 'createDateTime,desc',
-    // startDate와 endDate는 초기에 설정하지 않음
 };
 
 /** 서버로부터 경기 데이터를 가져오는 함수 */
@@ -55,7 +54,6 @@ async function fetchGames() {
         sort: filterState.sort,
     });
 
-    // 키워드나 날짜가 있을 때만 파라미터에 추가
     if (filterState.keyword) {
         params.append('keyword', filterState.keyword);
     }
@@ -77,9 +75,7 @@ async function fetchGames() {
         console.log(`요청 URL: ${GAME_URL}`);
         const response = await fetch(GAME_URL, {
             method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${accessToken}`
-            }
+            headers: { 'Authorization': `Bearer ${accessToken}` }
         });
 
         if (!response.ok) {
@@ -171,6 +167,17 @@ function renderPagination(pageData: PageResponse<Game>): void {
     container.appendChild(nextBtn);
 }
 
+/** 모든 드롭다운을 닫는 함수 */
+function closeAllDropdowns(exceptWrapper: HTMLElement | null = null): void {
+    document.querySelectorAll<HTMLElement>('.custom-select-wrapper').forEach(wrapper => {
+        if (wrapper !== exceptWrapper) {
+            wrapper.classList.remove('open');
+        }
+    });
+}
+
+// --- 이벤트 핸들러 (Event Handlers) ---
+
 /** 탭 버튼 클릭 처리 */
 function handleTabClick(event: MouseEvent) {
     const clickedButton = event.currentTarget as HTMLElement;
@@ -178,37 +185,55 @@ function handleTabClick(event: MouseEvent) {
     const newStatus = clickedButton.dataset.status as FilterState['adminGameStatus'];
 
     if (newStatus && newStatus !== filterState.adminGameStatus) {
-        // 상태 변경
         filterState.adminGameStatus = newStatus;
         filterState.page = 0;
-        
-        // 날짜 필터 상태와 화면(UI) 모두 초기화
         filterState.startDate = undefined;
         filterState.endDate = undefined;
         if (datePickerInstance) {
             datePickerInstance.clear();
         }
-
         fetchGames();
-
-        // 시각적 활성 상태 변경
         allTabButtons.forEach(btn => btn.classList.remove('active'));
         clickedButton.classList.add('active');
     }
 }
 
-/** 정렬 방식 변경 처리 */
-function handleSortChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    filterState.sort = selectElement.value;
-    filterState.page = 0;
-    fetchGames();
+/** 드롭다운 메뉴를 열고 닫는 핸들러 */
+function handleDropdownTriggerClick(event: MouseEvent): void {
+    event.stopPropagation();
+    const wrapper = (event.currentTarget as HTMLElement).closest<HTMLElement>('.custom-select-wrapper');
+    if (wrapper) {
+        closeAllDropdowns(wrapper);
+        wrapper.classList.toggle('open');
+    }
+}
+
+/** 정렬 기준 옵션 클릭 핸들러 */
+function handleSortOptionClick(event: MouseEvent): void {
+    const clickedOption = event.currentTarget as HTMLElement;
+    const wrapper = clickedOption.closest<HTMLElement>('#sort-dropdown');
+    if (!wrapper) return;
+
+    // UI 업데이트
+    const triggerText = wrapper.querySelector('.custom-select-trigger span');
+    if (triggerText) triggerText.textContent = clickedOption.textContent;
+    wrapper.querySelector('.custom-option.selected')?.classList.remove('selected');
+    clickedOption.classList.add('selected');
+    wrapper.classList.remove('open');
+
+    // 상태 업데이트 및 데이터 호출
+    const sortValue = clickedOption.dataset.value;
+    if (sortValue) {
+        filterState.sort = sortValue;
+        filterState.page = 0; // 정렬 기준 변경 시 첫 페이지로
+        fetchGames();
+    }
 }
 
 /** 검색 실행 처리 */
 function handleSearch() {
     const searchInput = document.getElementById('searchInput') as HTMLInputElement;
-    if(searchInput) {
+    if (searchInput) {
         filterState.keyword = searchInput.value;
         filterState.page = 0;
         fetchGames();
@@ -242,18 +267,29 @@ function handleDateChange(selectedDates: Date[]) {
 /** DOM 로드 완료 후 앱 초기화 */
 document.addEventListener('DOMContentLoaded', () => {
     const tabButtons = document.querySelectorAll<HTMLElement>('.tab-btn');
-    const sortSelect = document.getElementById('sort-select');
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
     const paginationContainer = document.getElementById('pagination-container');
+    const sortDropdown = document.getElementById('sort-dropdown');
 
+    // 이벤트 리스너 바인딩
     tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
-    sortSelect?.addEventListener('change', handleSortChange);
     searchButton?.addEventListener('click', handleSearch);
     searchInput?.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') handleSearch();
     });
     paginationContainer?.addEventListener('click', handlePaginationClick);
+
+    // 정렬 드롭다운 이벤트 리스너 (user.ts와 동일한 방식)
+    if (sortDropdown) {
+        sortDropdown.querySelector<HTMLElement>('.custom-select-trigger')?.addEventListener('click', handleDropdownTriggerClick);
+        sortDropdown.querySelectorAll<HTMLElement>('.custom-option').forEach(option => {
+            option.addEventListener('click', handleSortOptionClick);
+        });
+    }
+
+    // 외부 클릭 시 드롭다운 닫기
+    document.addEventListener('click', () => closeAllDropdowns());
 
     // Flatpickr 인스턴스 생성 및 저장
     datePickerInstance = flatpickr("#date-range-container", {
@@ -261,10 +297,9 @@ document.addEventListener('DOMContentLoaded', () => {
         mode: "range",
         dateFormat: "Y. m. d",
         locale: "ko",
-        // defaultDate 제거
-        onClose: handleDateChange, // onChange 대신 onClose 사용
+        onClose: handleDateChange,
     });
 
-    // 페이지가 처음 열릴 때 데이터 로드 (기본: 종료된 경기 전체)
+    // 페이지가 처음 열릴 때 데이터 로드
     fetchGames();
 });
