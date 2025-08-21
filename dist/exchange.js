@@ -1,7 +1,3 @@
-const today = new Date();
-const oneWeekAgo = new Date(today.setDate(today.getDate() - 7));
-const todayStr = new Date().toISOString().split('T')[0];
-const oneWeekAgoStr = oneWeekAgo.toISOString().split('T')[0];
 const formatDate = (date) => date.toISOString().split('T')[0];
 // --- 상태 및 상수 관리 ---
 /** 필터의 현재 상태를 저장하고 관리하는 전역 변수 */
@@ -10,8 +6,6 @@ const filterState = {
     size: 6,
     sort: 'createDateTime,desc',
     keyword: '',
-    startDate: oneWeekAgoStr,
-    endDate: todayStr,
 };
 let currentExchangeId = null;
 async function fetchExchanges() {

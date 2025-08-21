@@ -31,10 +31,6 @@ interface FilterState {
     endDate?: string;
 }
 
-const today = new Date();
-const oneWeekAgo = new Date(today.setDate(today.getDate() - 7));
-const todayStr = new Date().toISOString().split('T')[0];
-const oneWeekAgoStr = oneWeekAgo.toISOString().split('T')[0];
 const formatDate = (date: Date): string => date.toISOString().split('T')[0];
 
 // --- 상태 및 상수 관리 ---
@@ -45,8 +41,6 @@ const filterState: FilterState = {
     size: 6,
     sort: 'createDateTime,desc',
     keyword: '',
-    startDate: oneWeekAgoStr,
-    endDate: todayStr,
 };
 
 let currentExchangeId: number | null = null;
