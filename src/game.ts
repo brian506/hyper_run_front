@@ -68,11 +68,9 @@ async function fetchGames() {
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
         window.location.href = 'login.html';
-        return;
     }
 
     try {
-        console.log(`요청 URL: ${GAME_URL}`);
         const response = await fetch(GAME_URL, {
             method: 'GET',
             headers: { 'Authorization': `Bearer ${accessToken}` }
@@ -81,8 +79,8 @@ async function fetchGames() {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const responseDate = await response.json();
-        const data: PageResponse<Game> = responseDate.data;
+        const responseData = await response.json();
+        const data: PageResponse<Game> = responseData.data;
 
         renderTable(data);
         renderPagination(data);
@@ -193,6 +191,7 @@ function handleTabClick(event: MouseEvent) {
             datePickerInstance.clear();
         }
         fetchGames();
+
         allTabButtons.forEach(btn => btn.classList.remove('active'));
         clickedButton.classList.add('active');
     }
@@ -280,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     paginationContainer?.addEventListener('click', handlePaginationClick);
 
-    // 정렬 드롭다운 이벤트 리스너 (user.ts와 동일한 방식)
+    // 정렬 드롭다운 이벤트 리스너 
     if (sortDropdown) {
         sortDropdown.querySelector<HTMLElement>('.custom-select-trigger')?.addEventListener('click', handleDropdownTriggerClick);
         sortDropdown.querySelectorAll<HTMLElement>('.custom-option').forEach(option => {

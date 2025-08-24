@@ -215,7 +215,7 @@ function updateTotalCount(total: number): void {
 }
 
 function closeAllDropdowns(exceptWrapper: HTMLElement | null = null): void {
-    document.querySelectorAll<HTMLElement>('.custom-select-wrapper').forEach(wrapper => {
+    document.querySelectorAll<HTMLElement>('.custom-select-wrapper,.search-select-wrapper').forEach(wrapper => {
         if (wrapper !== exceptWrapper) {
             wrapper.classList.remove('open');
         }
@@ -306,7 +306,7 @@ function handleSortOptionClick(event: MouseEvent): void {
 
 function handleSearchCategoryOptionClick(event: MouseEvent): void {
     const clickedOption = event.currentTarget as HTMLElement;
-    const wrapper = clickedOption.closest<HTMLElement>('.custom-select-wrapper');
+    const wrapper = clickedOption.closest<HTMLElement>('.search-select-wrapper');
     if (!wrapper) return;
 
     const triggerText = wrapper.querySelector('.custom-select-trigger span');
@@ -324,7 +324,7 @@ function handleSearchCategoryOptionClick(event: MouseEvent): void {
 
 function handleDropdownTriggerClick(event: MouseEvent): void {
     event.stopPropagation();
-    const wrapper = (event.currentTarget as HTMLElement).closest<HTMLElement>('.custom-select-wrapper');
+    const wrapper = (event.currentTarget as HTMLElement).closest<HTMLElement>('.custom-select-wrapper, .search-select-wrapper');
     if (wrapper) {
         closeAllDropdowns(wrapper);
         wrapper.classList.toggle('open');

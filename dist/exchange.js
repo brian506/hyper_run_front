@@ -156,7 +156,7 @@ function updateTotalCount(total) {
     }
 }
 function closeAllDropdowns(exceptWrapper = null) {
-    document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
+    document.querySelectorAll('.custom-select-wrapper,.search-select-wrapper').forEach(wrapper => {
         if (wrapper !== exceptWrapper) {
             wrapper.classList.remove('open');
         }
@@ -234,7 +234,7 @@ function handleSortOptionClick(event) {
 }
 function handleSearchCategoryOptionClick(event) {
     const clickedOption = event.currentTarget;
-    const wrapper = clickedOption.closest('.custom-select-wrapper');
+    const wrapper = clickedOption.closest('.search-select-wrapper');
     if (!wrapper)
         return;
     const triggerText = wrapper.querySelector('.custom-select-trigger span');
@@ -249,7 +249,7 @@ function handleSearchCategoryOptionClick(event) {
 }
 function handleDropdownTriggerClick(event) {
     event.stopPropagation();
-    const wrapper = event.currentTarget.closest('.custom-select-wrapper');
+    const wrapper = event.currentTarget.closest('.custom-select-wrapper, .search-select-wrapper');
     if (wrapper) {
         closeAllDropdowns(wrapper);
         wrapper.classList.toggle('open');

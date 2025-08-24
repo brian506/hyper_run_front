@@ -167,7 +167,7 @@ function updateTotalCount(total: number): void {
 }
 
 function closeAllDropdowns(exceptWrapper: HTMLElement | null = null): void {
-    document.querySelectorAll<HTMLElement>('.custom-select-wrapper').forEach(wrapper => {
+    document.querySelectorAll<HTMLElement>('.custom-select-wrapper, .search-select-wrapper').forEach(wrapper => {
         if (wrapper !== exceptWrapper) {
             wrapper.classList.remove('open');
         }
@@ -236,7 +236,7 @@ function handleTableRowClick(event: MouseEvent) {
     showModal('user-detail-modal');
 }
 function applyFiltersAndFetch(): void {
-    console.log("필터 적용 및 데이터 호출!");
+    console.log("필터 적용 및 데이터 호출");
     const sortDropdown = document.getElementById('sort-dropdown');
     const searchCategoryDropdown = document.getElementById('search-category-wrapper'); 
     const searchInput = document.getElementById('searchInput') as HTMLInputElement;
@@ -269,6 +269,7 @@ function applyFiltersAndFetch(): void {
 /** 정렬 기준 옵션 클릭 핸들러 */
 function handleSortOptionClick(event: MouseEvent): void {
     console.log("옵션 정렬 선택됨");
+    event.stopPropagation();
     const clickedOption = event.currentTarget as HTMLElement;
     const wrapper = clickedOption.closest<HTMLElement>('#sort-dropdown');
     if (!wrapper) return;
@@ -285,6 +286,7 @@ function handleSortOptionClick(event: MouseEvent): void {
 
 /** 검색 카테고리 옵션 클릭 핸들러 */
 function handleSearchCategoryOptionClick(event: MouseEvent): void {
+    event.stopPropagation();
     const clickedOption = event.currentTarget as HTMLElement;
     const wrapper = clickedOption.closest<HTMLElement>('#search-category-wrapper');
     if (!wrapper) return;
@@ -302,7 +304,7 @@ function handleSearchCategoryOptionClick(event: MouseEvent): void {
 
 function handleDropdownTriggerClick(event: MouseEvent): void {
     event.stopPropagation();
-    const wrapper = (event.currentTarget as HTMLElement).closest<HTMLElement>('.custom-select-wrapper');
+    const wrapper = (event.currentTarget as HTMLElement).closest<HTMLElement>('.custom-select-wrapper, .search-select-wrapper');
     if (wrapper) {
         closeAllDropdowns(wrapper);
         wrapper.classList.toggle('open');
@@ -399,7 +401,7 @@ function bindUsereventListeners(): void {
     }
 
     // 검색 카테고리 드롭다운
-    const searchCategoryDropdown = document.getElementById('search-category-wrapper') || document.getElementById('sort-category-wrapper');
+    const searchCategoryDropdown = document.getElementById('search-category-wrapper');
     if (searchCategoryDropdown) {
         searchCategoryDropdown.querySelector<HTMLElement>('.custom-select-trigger')?.addEventListener('click', handleDropdownTriggerClick);
         searchCategoryDropdown.querySelectorAll<HTMLElement>('.custom-option').forEach(option => {

@@ -60,13 +60,13 @@
     padding: 1px 24px;
 }
 
-/* 2-1. 왼쪽 사이드바 */
+/* 왼쪽 사이드바 */
 .sidebar {
     margin: 24px;
     width: 214px;
     background-color: #FDF1E6;
     border-radius: 13px;
-    padding: 20px;
+    padding: 20px 0;
     flex-shrink: 0; /* 사이드바 너비가 줄어들지 않도록 고정 */
     align-self: flex-start;
     transition: height 0.1s ease-out;
@@ -80,14 +80,15 @@
 
 .nav-item {
     display: flex;
+    width: 100%;
     align-items: center;
     gap: 16px;
-    padding: 14px 12px;
+    padding: 14px 40px;
+    box-sizing: border-box;
     text-decoration: none;
     color: #75787B;
     font-weight: 700;
     font-size: 12px;
-    border-radius: 8px;
     transition: background-color 0.2s, color 0.2s;
 }
 
@@ -329,7 +330,8 @@ span.flatpickr-weekday {
     transition: all 0.2s ease-out;
 }
 
-.custom-select-wrapper.open .custom-options {
+.custom-select-wrapper.open .custom-options,
+.search-select-wrapper.open .custom-options {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

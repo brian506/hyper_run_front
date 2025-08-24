@@ -127,7 +127,7 @@ function updateTotalCount(total) {
     }
 }
 function closeAllDropdowns(exceptWrapper = null) {
-    document.querySelectorAll('.custom-select-wrapper').forEach(wrapper => {
+    document.querySelectorAll('.custom-select-wrapper, .search-select-wrapper').forEach(wrapper => {
         if (wrapper !== exceptWrapper) {
             wrapper.classList.remove('open');
         }
@@ -186,7 +186,7 @@ function handleTableRowClick(event) {
     showModal('user-detail-modal');
 }
 function applyFiltersAndFetch() {
-    console.log("필터 적용 및 데이터 호출!");
+    console.log("필터 적용 및 데이터 호출");
     const sortDropdown = document.getElementById('sort-dropdown');
     const searchCategoryDropdown = document.getElementById('search-category-wrapper');
     const searchInput = document.getElementById('searchInput');
@@ -213,6 +213,7 @@ function applyFiltersAndFetch() {
 /** 정렬 기준 옵션 클릭 핸들러 */
 function handleSortOptionClick(event) {
     console.log("옵션 정렬 선택됨");
+    event.stopPropagation();
     const clickedOption = event.currentTarget;
     const wrapper = clickedOption.closest('#sort-dropdown');
     if (!wrapper)
@@ -227,6 +228,7 @@ function handleSortOptionClick(event) {
 }
 /** 검색 카테고리 옵션 클릭 핸들러 */
 function handleSearchCategoryOptionClick(event) {
+    event.stopPropagation();
     const clickedOption = event.currentTarget;
     const wrapper = clickedOption.closest('#search-category-wrapper');
     if (!wrapper)
@@ -241,7 +243,7 @@ function handleSearchCategoryOptionClick(event) {
 }
 function handleDropdownTriggerClick(event) {
     event.stopPropagation();
-    const wrapper = event.currentTarget.closest('.custom-select-wrapper');
+    const wrapper = event.currentTarget.closest('.custom-select-wrapper, .search-select-wrapper');
     if (wrapper) {
         closeAllDropdowns(wrapper);
         wrapper.classList.toggle('open');
@@ -321,7 +323,7 @@ function bindUsereventListeners() {
         sortDropdown.querySelector('#sort-asc')?.addEventListener('click', applyFiltersAndFetch);
     }
     // 검색 카테고리 드롭다운
-    const searchCategoryDropdown = document.getElementById('search-category-wrapper') || document.getElementById('sort-category-wrapper');
+    const searchCategoryDropdown = document.getElementById('search-category-wrapper');
     if (searchCategoryDropdown) {
         searchCategoryDropdown.querySelector('.custom-select-trigger')?.addEventListener('click', handleDropdownTriggerClick);
         searchCategoryDropdown.querySelectorAll('.custom-option').forEach(option => {
