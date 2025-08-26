@@ -20,7 +20,8 @@ loginForm.addEventListener('submit',async (event: Event) => {
             });
 
         if(response.ok) {
-            const accessToken = response.headers.get('Authorization');
+            const data = await response.json();
+            const accessToken = data.accessToken; 
 
             if(accessToken){            
               localStorage.setItem('accessToken',accessToken);

@@ -144,7 +144,7 @@ function renderPagination(pageData: PageResponse<Payment>): void {
 
     container.innerHTML = '';
     
-    // 페이지네이션 로직은 기존과 동일...
+    
     const prevBtn = document.createElement('a');
     prevBtn.href = '#';
     prevBtn.className = 'page-arrow';

@@ -229,19 +229,6 @@ span.flatpickr-weekday {
 }
 
 /* 2-2. 오른쪽 메인 콘텐츠 */
-.content-area {
-    flex-grow: 1; /* 사이드바를 제외한 나머지 모든 가로 공간을 차지 */
-    padding: 24px;
-    overflow-y: auto; /* 콘텐츠가 길어지면 세로 스크롤바 생성 */
-
-}
-
-.content-header, .filter-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-}
 
 /* 필터 및 검색 */
 .filter-bar {

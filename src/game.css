@@ -14,11 +14,6 @@
     margin: 0;
     padding: 0;
 }
-.body {
-    font-family: var(--font-family);
-    background-color: var(--background-color);
-    color: var(--text-color-primary);
-}
 
 
 .app-container {
@@ -349,7 +344,8 @@ span.flatpickr-weekday {
     transition: all 0.2s ease-out;
 }
 
-.custom-select-wrapper.open .custom-options {
+.custom-select-wrapper.open .custom-options,
+.search-select-wrapper.open .custom-options {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

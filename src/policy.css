@@ -40,9 +40,9 @@
 /* 메인 영역: 사이드바와 콘텐츠를 가로로 배치 */
 .main-area {
     display: flex;
-    flex-grow: 1; /* 헤더를 제외한 나머지 모든 세로 공간을 차지 */
-    overflow: hidden; /* 내부 콘텐츠가 넘칠 경우 스크롤 관리 */
-    gap: 24px; /* 사이드 바와 테이블 사이의 간격*/
+    flex-grow: 1;
+    overflow: hidden;
+    gap: 24px; 
     padding: 1px 24px;
 }
 /* 왼쪽 사이드바 */
@@ -134,8 +134,8 @@ p, ul {
 
 /* 리스트 스타일 */
 ul {
-    padding-left: 20px; /* 불릿 포인트 들여쓰기 */
-    list-style-type: '•  '; /* 기본 불릿 포인트와 공백 추가 */
+    padding-left: 20px; 
+    list-style-type: '•  '; 
 }
 
 li {

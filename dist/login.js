@@ -17,7 +17,8 @@ loginForm.addEventListener('submit', async (event) => {
             body: JSON.stringify({ email, password }),
         });
         if (response.ok) {
-            const accessToken = response.headers.get('Authorization');
+            const data = await response.json();
+            const accessToken = data.accessToken;
             if (accessToken) {
                 localStorage.setItem('accessToken', accessToken);
                 window.location.href = 'games.html';

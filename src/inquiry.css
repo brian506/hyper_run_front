@@ -14,11 +14,6 @@
     margin: 0;
     padding: 0;
 }
-.body {
-    font-family: var(--font-family);
-    background-color: var(--background-color);
-    color: var(--text-color-primary);
-}
 .app-container {
     display: flex;
     flex-direction: column;
@@ -700,22 +695,20 @@
   }
   
   /* '답변 취소' 버튼 개별 스타일 */
-  .cancel-btn {
+  .cancel-answer-btn {
     background-color: #ffffff;
     color: #333;
-    
   }
-  
+
   /* '문의 답변하기' 버튼 개별 스타일 */
-  .submit-btn {
+  .submit-answer-btn {
     background-color: #ffffff;
     color: #333;
-   
   }
-  
+
   /* '문의 답변하기' 버튼의 아이콘은 채워진 모양으로 변경 */
-  .submit-btn svg {
-    fill: #333; /* 아이콘 내부 채우기 */
+  .submit-answer-btn svg {
+    fill: #333;
   }
 
   /* 사용자 삭제 팝업 */

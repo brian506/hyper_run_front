@@ -155,8 +155,8 @@
 
 /* 너비가 100%인 버튼 스타일 */
 .full-width {
-    flex: none; /* flex: 1 속성 무시 */
     width: 100%;
+    flex: none; /* flex: 1 속성 무시 */
 }
 
 /* 팝업 관련 CSS는 payment.css의 것을 재사용 */
@@ -243,10 +243,4 @@
 }
 .cancel-btn:hover {
     background-color: #AEAEB2;
-}
-
-/* 너비가 100%인 버튼 스타일 */
-.full-width {
-    width: 100%;
-    flex: none; /* flex: 1 속성 무시 */
 }

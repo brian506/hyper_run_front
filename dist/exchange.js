@@ -307,32 +307,25 @@ function handleCancelCancellation() {
 function handleCancellationSuccessOk() {
     hideModal('cancel-success-modal');
     hideModal('exchange-detail-modal');
-    fetchExchanges(); // Refresh the table
+    fetchExchanges();
 }
 function bindEventListeners() {
-    // Search
     document.getElementById('searchButton')?.addEventListener('click', handleSearch);
     document.getElementById('searchInput')?.addEventListener('keydown', (e) => {
         if (e.key === 'Enter')
             handleSearch();
     });
-    // Pagination
     document.getElementById('pagination-container')?.addEventListener('click', handlePaginationClick);
-    // Table Row Clicks (Event Delegation)
     document.getElementById('data-table-body')?.addEventListener('click', handleTableRowClick);
-    // Main Detail Modal
     document.querySelector('#exchange-detail-modal .close-btn')?.addEventListener('click', () => hideModal('exchange-detail-modal'));
     document.getElementById('approve-btn')?.addEventListener('click', handleApproveBtnClick);
     document.getElementById('cancel-btn')?.addEventListener('click', handleCancelBtnClick);
-    // Approve Modals
     document.querySelector('#approve-confirm-modal .confirm-btn')?.addEventListener('click', handleConfirmApproval);
     document.querySelector('#approve-confirm-modal .cancel-btn')?.addEventListener('click', handleCancelApproval);
     document.querySelector('#approve-success-modal .confirm-btn')?.addEventListener('click', handleApprovalSuccessOk);
-    // Cancel Modals
     document.querySelector('#cancel-confirm-modal .confirm-btn')?.addEventListener('click', handleConfirmCancellation);
     document.querySelector('#cancel-confirm-modal .cancel-btn')?.addEventListener('click', handleCancelCancellation);
     document.querySelector('#cancel-success-modal .confirm-btn')?.addEventListener('click', handleCancellationSuccessOk);
-    // Sort Dropdown
     const sortDropdown = document.getElementById('sort-dropdown');
     if (sortDropdown) {
         sortDropdown.querySelector('.custom-select-trigger')?.addEventListener('click', handleDropdownTriggerClick);
@@ -340,7 +333,6 @@ function bindEventListeners() {
             option.addEventListener('click', handleSortOptionClick);
         });
     }
-    // Search Category Dropdown
     const searchCategoryDropdown = document.getElementById('search-category-wrapper');
     if (searchCategoryDropdown) {
         searchCategoryDropdown.querySelector('.custom-select-trigger')?.addEventListener('click', handleDropdownTriggerClick);
@@ -348,17 +340,14 @@ function bindEventListeners() {
             option.addEventListener('click', handleSearchCategoryOptionClick);
         });
     }
-    // Close dropdowns when clicking outside
     document.addEventListener('click', () => closeAllDropdowns());
 }
-// --- Application Initialization ---
 function initializeExchangeApp() {
-    // Initialize Flatpickr date range picker
     flatpickr("#date-range-display", {
         mode: "range",
         dateFormat: "Y-m-d",
         defaultDate: [filterState.startDate, filterState.endDate],
-        locale: "ko", // For Korean locale
+        locale: "ko",
         onClose: function (selectedDates) {
             if (selectedDates.length === 2) {
                 filterState.startDate = formatDate(selectedDates[0]);
@@ -369,7 +358,7 @@ function initializeExchangeApp() {
         }
     });
     bindEventListeners();
-    fetchExchanges(); // Initial data fetch
+    fetchExchanges();
 }
 document.addEventListener('DOMContentLoaded', initializeExchangeApp);
 export {};

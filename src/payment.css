@@ -14,11 +14,6 @@
     margin: 0;
     padding: 0;
 }
-.body {
-    font-family: var(--font-family);
-    background-color: var(--background-color);
-    color: var(--text-color-primary);
-}
 .app-container {
     display: flex;
     flex-direction: column;
@@ -523,10 +518,6 @@ span.flatpickr-weekday {
 
 .data-table tbody tr:hover {
     background-color: #f8f9fa;
-}
-.data-table tbody tr.clickable-row:hover {
-    background-color: #fff3e0; /* 연한 주황색 배경으로 강조 */
-    cursor: pointer;
 }
 /* 페이지네이션 */
 .pagination {

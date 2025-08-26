@@ -12,7 +12,6 @@ const refundTypeToKorean: { [key in RefundType]: string } = {
 };
 
 // --- 인터페이스, 타입, 헬퍼 함수 ---
-// 서버의 dto 와 필드값 이름이 같아야함
 interface PaymentDetail {
     paymentId: number;
     phoneNumber: string;
@@ -41,7 +40,6 @@ function hideModal(modalId: string) {
 
 
 // --- API 호출 ---
-// approveRefund, rejectRefund 함수는 그대로 유지
 async function fetchPaymentDetail(paymentId: string) {
 
     const REFUND_URL = `http://localhost:8080/v1/api/admin/payments/refunds/${paymentId}`;
@@ -183,7 +181,7 @@ function bindEventListeners(paymentId: string): void {
         const reason = reasonTextarea.value;
         await approveRefund(paymentId);
         
-        // [수정] alert 대신, 확인 모달을 닫고 성공 모달을 엽니다.
+        
         hideModal('approve-confirm-modal');
         showModal('approve-success-modal');
     });
@@ -195,12 +193,12 @@ function bindEventListeners(paymentId: string): void {
         const reason = reasonTextarea.value;
         await rejectRefund(paymentId);
 
-        // [수정] alert 대신, 확인 모달을 닫고 성공 모달을 엽니다.
+        
         hideModal('reject-confirm-modal');
         showModal('reject-success-modal');
     });
 
-    // --- [추가] 완료 팝업들의 '확인' 버튼 이벤트 리스너 ---
+    
     
     // 승인 완료 모달의 '확인' 버튼
     const approveSuccessModal = document.getElementById('approve-success-modal');
