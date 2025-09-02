@@ -27,7 +27,7 @@ async function fetchPayments() {
         params.append('maxAmount', filterState.maxAmount.toString());
     if (filterState.state)
         params.append('state', filterState.state);
-    const PAYMENT_URL = `http://localhost:8080/v1/api/admin/payments?${params.toString()}`;
+    const PAYMENT_URL = `http://43.201.192.25:8081/v1/api/admin/payments?${params.toString()}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');

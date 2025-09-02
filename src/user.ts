@@ -420,3 +420,4 @@ function initializeUserApp(): void {
 }
 
 document.addEventListener('DOMContentLoaded', initializeUserApp);
+export {};

@@ -64,7 +64,7 @@ async function fetchExchanges(){
         params.append('exchangeStatus', filterState.exchangeStatus);
     }
 
-    const EXCHANGE_URL = `http://localhost:8080/v1/api/admin/exchanges?${params.toString()}`;
+    const EXCHANGE_URL = `http://43.201.192.25:8081/v1/api/admin/exchanges?${params.toString()}`;
     const accessToken = localStorage.getItem('accessToken'); 
 
     if(!accessToken){
@@ -106,7 +106,7 @@ async function fetchExchanges(){
 }
 
 async function confirmExchange(id: number){
-    const CONFIRM_URL = `http://localhost:8080/v1/api/admin/exchanges/confirm/${id}`;
+    const CONFIRM_URL = `http://43.201.192.25:8081/v1/api/admin/exchanges/confirm/${id}`;
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {
@@ -126,7 +126,7 @@ async function confirmExchange(id: number){
 
 
 async function cancelExchange(id: number){
-    const CANCEL_URL = `http://localhost:8080/v1/api/admin/exchanges/cancel/${id}`;
+    const CANCEL_URL = `http://43.201.192.25:8081/v1/api/admin/exchanges/cancel/${id}`;
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {

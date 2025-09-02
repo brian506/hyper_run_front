@@ -1,4 +1,3 @@
-"use strict";
 // --- 상태 관리 (State Management) ---
 const filterState = {
     page: 0,
@@ -339,3 +338,4 @@ function initializeUserApp() {
     fetchUsers();
 }
 document.addEventListener('DOMContentLoaded', initializeUserApp);
+export {};

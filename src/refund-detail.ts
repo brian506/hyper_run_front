@@ -42,7 +42,7 @@ function hideModal(modalId: string) {
 // --- API 호출 ---
 async function fetchPaymentDetail(paymentId: string) {
 
-    const REFUND_URL = `http://localhost:8080/v1/api/admin/payments/refunds/${paymentId}`;
+    const REFUND_URL = `http://43.201.192.25:8081/v1/api/admin/payments/refunds/${paymentId}`;
     const accessToken = localStorage.getItem('accessToken');
 
     try{
@@ -66,7 +66,7 @@ async function fetchPaymentDetail(paymentId: string) {
 
 async function approveRefund(paymentId: string) {
 
-    const CONFIRM_URL = `http://localhost:8080/v1/api/admin/payments/refunds/${paymentId}/confirm`;
+    const CONFIRM_URL = `http://43.201.192.25:8081/v1/api/admin/payments/refunds/${paymentId}/confirm`;
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {
@@ -100,7 +100,7 @@ async function approveRefund(paymentId: string) {
 }
 
 async function rejectRefund(paymentId: string) {
-    const REJECT_URL = `http://localhost:8080/v1/api/admin/payments/refunds/${paymentId}/reject`;
+    const REJECT_URL = `http://43.201.192.25:8081/v1/api/admin/payments/refunds/${paymentId}/reject`;
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {
@@ -237,3 +237,4 @@ async function initializeApp(): Promise<void> {
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
+export {};

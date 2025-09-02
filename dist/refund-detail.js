@@ -1,4 +1,3 @@
-"use strict";
 const refundTypeToKorean = {
     'LACK_OF_FEATURES': '기능 부족',
     'COMPLICATED_INTERFACE': '복잡한 인터페이스',
@@ -22,7 +21,7 @@ function hideModal(modalId) {
 }
 // --- API 호출 ---
 async function fetchPaymentDetail(paymentId) {
-    const REFUND_URL = `http://localhost:8080/v1/api/admin/payments/refunds/${paymentId}`;
+    const REFUND_URL = `http://43.201.192.25:8081/v1/api/admin/payments/refunds/${paymentId}`;
     const accessToken = localStorage.getItem('accessToken');
     try {
         const response = await fetch(REFUND_URL, {
@@ -41,7 +40,7 @@ async function fetchPaymentDetail(paymentId) {
     }
 }
 async function approveRefund(paymentId) {
-    const CONFIRM_URL = `http://localhost:8080/v1/api/admin/payments/refunds/${paymentId}/confirm`;
+    const CONFIRM_URL = `http://43.201.192.25:8081/v1/api/admin/payments/refunds/${paymentId}/confirm`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
@@ -68,7 +67,7 @@ async function approveRefund(paymentId) {
     }
 }
 async function rejectRefund(paymentId) {
-    const REJECT_URL = `http://localhost:8080/v1/api/admin/payments/refunds/${paymentId}/reject`;
+    const REJECT_URL = `http://43.201.192.25:8081/v1/api/admin/payments/refunds/${paymentId}/reject`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
@@ -178,3 +177,4 @@ async function initializeApp() {
     }
 }
 document.addEventListener('DOMContentLoaded', initializeApp);
+export {};
