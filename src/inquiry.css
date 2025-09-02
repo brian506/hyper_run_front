@@ -14,6 +14,11 @@
     margin: 0;
     padding: 0;
 }
+.body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color-primary);
+}
 .app-container {
     display: flex;
     flex-direction: column;
@@ -115,12 +120,12 @@
 }
 
 
-/* --- 필터 바 --- */
+
 /* 필터 및 검색 */
 .filter-bar {
     display: flex;
-    justify-content: space-between; /* 왼쪽 그룹과 오른쪽 그룹을 양쪽 끝으로 보냄 */
-    align-items: flex-end; /* 라벨과 입력창의 아래 라인을 맞춤 */
+    justify-content: space-between; 
+    align-items: flex-end; 
     padding: 20px;
     background-color: white;
     border-radius: 12px;
@@ -150,11 +155,9 @@
     font-size: 12px;
     color: #000000;
     margin-bottom: 10px;
-    display: block; /* label은 inline 요소이므로 block으로 변경해야 margin-bottom이 적용됩니다. */
+    display: block; 
 }
-/* ------------------------- */
-/* 커스텀 드롭다운 스타일     */
-/* ------------------------- */
+
 .custom-select-wrapper {
     position: relative;
     width: 272px; /* 정렬 드롭다운 너비 */
@@ -172,7 +175,7 @@
     -moz-appearance: none;
     appearance: none;
     
-    width: 100%; /* 부모(.custom-select-wrapper)의 너비를 따름 */
+    width: 100%; 
     height: 47px; 
     padding: 0 16px; 
     border: 1px solid #000000;
@@ -336,9 +339,7 @@
 }
 .tilde { color: var(--text-secondary); }
 
-/* ------------------------- */
-/* 검색 박스 스타일          */
-/* ------------------------- */
+
 .search-box {
     position: relative;
     width: 304px;
@@ -539,8 +540,8 @@
     flex-direction: column;
 
     padding: 24px 32px;
-    overflow-y: auto; /* 내용이 길어지면 자동으로 세로 스크롤바 생성 */
-    flex-grow: 1; /* 헤더를 제외한 모든 남은 공간을 차지 */
+    overflow-y: auto; 
+    flex-grow: 1;
     min-height: 0;
 }
  
@@ -597,10 +598,9 @@
 }
 
 #answer-inquiry {
-    /* Flexbox를 사용해 아이콘과 텍스트를 가로로 배치 */
     display: inline-flex;
-    align-items: center; /* 세로 중앙 정렬 */
-    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center;
+    justify-content: center; 
     gap: 8px; /* 아이콘과 텍스트 사이 간격 */
 
     /* 너비를 내용에 맞게 자동으로 조절하고 여백 확보 */
@@ -695,20 +695,22 @@
   }
   
   /* '답변 취소' 버튼 개별 스타일 */
-  .cancel-answer-btn {
+  .cancel-btn {
     background-color: #ffffff;
     color: #333;
+    
   }
-
+  
   /* '문의 답변하기' 버튼 개별 스타일 */
-  .submit-answer-btn {
+  .submit-btn {
     background-color: #ffffff;
     color: #333;
+   
   }
-
+  
   /* '문의 답변하기' 버튼의 아이콘은 채워진 모양으로 변경 */
-  .submit-answer-btn svg {
-    fill: #333;
+  .submit-btn svg {
+    fill: #333; /* 아이콘 내부 채우기 */
   }
 
   /* 사용자 삭제 팝업 */

@@ -14,6 +14,11 @@
     margin: 0;
     padding: 0;
 }
+.body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color-primary);
+}
 
 
 .app-container {
@@ -56,9 +61,9 @@
 /* 메인 영역: 사이드바와 콘텐츠를 가로로 배치 */
 .main-area {
     display: flex;
-    flex-grow: 1; /* 헤더를 제외한 나머지 모든 세로 공간을 차지 */
-    overflow: hidden; /* 내부 콘텐츠가 넘칠 경우 스크롤 관리 */
-    gap: 24px; /* 사이드 바와 테이블 사이의 간격*/
+    flex-grow: 1; 
+    overflow: hidden;
+    gap: 24px; 
     padding: 1px 24px;
 }
 
@@ -107,9 +112,9 @@
 
 /* 오른쪽 메인 콘텐츠 */
 .content-area {
-    flex-grow: 1; /* 사이드바를 제외한 나머지 모든 가로 공간을 차지 */
+    flex-grow: 1; 
     padding: 24px;
-    overflow-y: auto; /* 콘텐츠가 길어지면 세로 스크롤바 생성 */
+    overflow-y: auto;
 }
 
 .content-header, .filter-bar {
@@ -306,7 +311,7 @@ span.flatpickr-weekday {
     -moz-appearance: none;
     appearance: none;
     
-    width: 100%; /* 부모(.custom-select-wrapper)의 너비를 따름 */
+    width: 100%;
     height: 47px; 
     padding: 0 16px; 
     border: 1px solid #000000;
@@ -344,8 +349,7 @@ span.flatpickr-weekday {
     transition: all 0.2s ease-out;
 }
 
-.custom-select-wrapper.open .custom-options,
-.search-select-wrapper.open .custom-options {
+.custom-select-wrapper.open .custom-options {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -377,9 +381,9 @@ span.flatpickr-weekday {
 .search-box input {
     width: 100%;
     height: 100%;
-    padding: 0 44px 0 20px; /* 아이콘 공간 확보를 위한 패딩 (오른쪽, 왼쪽) */
+    padding: 0 44px 0 20px;
     border: 1px solid var(--border-secondary-color);
-    border-radius: 999px; /* 완전히 둥근 '알약' 모양 */
+    border-radius: 999px; 
     font-size: 1rem;
 }
 .search-box input:focus {

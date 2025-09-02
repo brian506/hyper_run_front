@@ -19,7 +19,7 @@ async function fetchUsers() {
         params.append('keyword', filterState.keyword);
         params.append('searchCategory', filterState.searchCategory);
     }
-    const USER_URL = `http://localhost:8080/v1/api/admin/users?${params.toString()}`;
+    const USER_URL = `http://43.201.192.25:8081/v1/api/admin/users?${params.toString()}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
@@ -49,7 +49,7 @@ async function fetchUsers() {
     }
 }
 async function deleteUser(email) {
-    const DELETE_URL = `http://localhost:8080/v1/api/admin/users/${email}`;
+    const DELETE_URL = `http://43.201.192.25:8081/v1/api/admin/users/${email}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
