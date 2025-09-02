@@ -9,7 +9,7 @@ loginForm.addEventListener('submit', async (event) => {
     const email = emailInput.value;
     const password = passwordInput.value;
     try {
-        const response = await fetch('http://43.201.192.25:8081/v1/api/admin/login', {
+        const response = await fetch('https://43.201.192.25:8081/v1/api/admin/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

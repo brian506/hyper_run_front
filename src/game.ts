@@ -62,7 +62,7 @@ async function fetchGames() {
         params.append('endDate', filterState.endDate);
     }
 
-    const GAME_URL = `http://43.201.192.25:8081/v1/api/admin/games?${params.toString()}`;
+    const GAME_URL = `https://43.201.192.25:8081/v1/api/admin/games?${params.toString()}`;
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {

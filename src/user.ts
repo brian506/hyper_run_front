@@ -45,7 +45,7 @@ async function fetchUsers() {
         params.append('keyword', filterState.keyword);
         params.append('searchCategory', filterState.searchCategory);
     }
-    const USER_URL = `http://43.201.192.25:8081/v1/api/admin/users?${params.toString()}`;
+    const USER_URL = `https://43.201.192.25:8081/v1/api/admin/users?${params.toString()}`;
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {
@@ -80,7 +80,7 @@ async function fetchUsers() {
 }
 
 async function deleteUser(email: string){
-    const DELETE_URL = `http://43.201.192.25:8081/v1/api/admin/users/${email}`;
+    const DELETE_URL = `https://43.201.192.25:8081/v1/api/admin/users/${email}`;
     const accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {
