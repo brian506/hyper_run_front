@@ -25,7 +25,7 @@ async function fetchExchanges() {
     if (filterState.exchangeStatus) {
         params.append('exchangeStatus', filterState.exchangeStatus);
     }
-    const EXCHANGE_URL = `https://43.201.192.25:8081/v1/api/admin/exchanges?${params.toString()}`;
+    const EXCHANGE_URL = `https://d19a6mzn99qmli.cloudfront.net/v1/api/admin/exchanges?${params.toString()}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
@@ -62,7 +62,7 @@ async function fetchExchanges() {
     }
 }
 async function confirmExchange(id) {
-    const CONFIRM_URL = `https://43.201.192.25:8081/v1/api/admin/exchanges/confirm/${id}`;
+    const CONFIRM_URL = `https://d19a6mzn99qmli.cloudfront.net/v1/api/admin/exchanges/confirm/${id}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
@@ -77,7 +77,7 @@ async function confirmExchange(id) {
     }
 }
 async function cancelExchange(id) {
-    const CANCEL_URL = `https://43.201.192.25:8081/v1/api/admin/exchanges/cancel/${id}`;
+    const CANCEL_URL = `https://d19a6mzn99qmli.cloudfront.net/v1/api/admin/exchanges/cancel/${id}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');

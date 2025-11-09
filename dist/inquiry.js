@@ -41,7 +41,7 @@ async function fetchInquiry() {
         params.append('state', filterState.state);
     if (filterState.type)
         params.append('type', filterState.type);
-    const INQUIRY_URL = `https://43.201.192.25:8081/v1/api/admin/inquiry?${params.toString()}`;
+    const INQUIRY_URL = `https://d19a6mzn99qmli.cloudfront.net/v1/api/admin/inquiry?${params.toString()}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
@@ -66,7 +66,7 @@ async function fetchInquiry() {
     }
 }
 async function deleteInquiry(inquiryId) {
-    const DELETE_INQUIRY_URL = `https://43.201.192.25:8081/v1/api/admin/inquiry/${inquiryId}`;
+    const DELETE_INQUIRY_URL = `https://d19a6mzn99qmli.cloudfront.net/v1/api/admin/inquiry/${inquiryId}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
@@ -81,7 +81,7 @@ async function deleteInquiry(inquiryId) {
     }
 }
 async function answerInquiry(inquiryId, answer) {
-    const ANSWER_URL = `https://43.201.192.25:8081/v1/api/admin/inquiry/answer/${inquiryId}`;
+    const ANSWER_URL = `https://d19a6mzn99qmli.cloudfront.net/v1/api/admin/inquiry/answer/${inquiryId}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');

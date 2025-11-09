@@ -27,7 +27,7 @@ async function fetchPayments() {
         params.append('maxAmount', filterState.maxAmount.toString());
     if (filterState.state)
         params.append('state', filterState.state);
-    const PAYMENT_URL = `https://43.201.192.25:8081/v1/api/admin/payments?${params.toString()}`;
+    const PAYMENT_URL = `https://d19a6mzn99qmli.cloudfront.net/v1/api/admin/payments?${params.toString()}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');
@@ -195,15 +195,17 @@ function handlePopupDropdownOptionClick(event) {
 /** 테이블 행 클릭 시 상세 페이지로 이동하는 핸들러 */
 function handleTableRowClick(event) {
     const row = event.target.closest('tr');
-    //  clickable-row 클래스가 있는 행만 반응하도록 변경
     if (!row || !row.classList.contains('clickable-row'))
         return;
+    // --- 모든 선택 해제 후 현재 행만 선택 ---
+    document.querySelectorAll('.clickable-row').forEach(r => r.classList.remove('selected'));
+    row.classList.add('selected');
     const paymentId = row.dataset.paymentId;
     const paymentInfoString = row.dataset.paymentInfo;
     if (!paymentId || !paymentInfoString)
         return;
+    // 상세 페이지 이동 (필요 시 유지)
     sessionStorage.setItem('selectedPaymentDetail', paymentInfoString);
-    // 모달을 띄우는 대신, paymentId를 가지고 새로운 페이지로 이동
     window.location.href = `refund-detail.html?paymentId=${paymentId}`;
 }
 function handlePaginationClick(event) {

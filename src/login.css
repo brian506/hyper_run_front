@@ -124,3 +124,12 @@ body {
 #login-button:hover {
     background-color: #5F5264;
 }
+/* 유틸 */
+.hidden { display: none; }
+
+/* 인라인 에러 라인 */
+.error-text {
+  margin: 0;
+  color: #d23535;
+  font-size: 0.9rem;
+}

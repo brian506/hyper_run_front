@@ -23,7 +23,7 @@ async function fetchGames() {
         params.append('startDate', filterState.startDate);
         params.append('endDate', filterState.endDate);
     }
-    const GAME_URL = `https://43.201.192.25:8081/v1/api/admin/games?${params.toString()}`;
+    const GAME_URL = `https://d19a6mzn99qmli.cloudfront.net/v1/api/admin/games?${params.toString()}`;
     const accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
         console.error('인증 토큰이 없습니다.');

@@ -516,8 +516,15 @@ span.flatpickr-weekday {
     border-bottom: none;
 }
 
-.data-table tbody tr:hover {
-    background-color: #f8f9fa;
+/* 기존: 모든 행 hover 회색 → 비클릭 행에만 적용 */
+.data-table tbody tr:not(.clickable-row):hover td {
+  background-color: #f8f9fa;
+}
+
+/* 환불 요청중(= clickable-row) 위에 마우스 올렸을 때만 연한 주황 */
+.data-table tbody tr.clickable-row:hover td {
+  background-color: var(--primary-light-color) !important; /* #FDF1E6 */
+  cursor: pointer;
 }
 /* 페이지네이션 */
 .pagination {
@@ -556,4 +563,9 @@ span.flatpickr-weekday {
 
 .hidden {
     display: none !important;
+}
+
+.clickable-row.selected {
+    background-color: var(--primary-light-color); /* 밝은 주황 배경 */
+    transition: background-color 0.2s ease;
 }

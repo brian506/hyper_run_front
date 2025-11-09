@@ -406,11 +406,9 @@
     border-bottom: none;
 }
 
+
 .data-table tbody tr:hover {
     background-color: #f8f9fa;
-}
-.data-table tbody tr.clickable-row:hover {
-    background-color: #fff3e0; /* 연한 주황색 배경으로 강조 */
     cursor: pointer;
 }
 
